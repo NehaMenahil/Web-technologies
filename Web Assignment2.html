@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Assignment#02</title>
+      
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head >
+
+<body>
+    
+
+<div class="container">
+  <div class="d-flex m-3">
+    <form class="m-3">
+      <div class="form-group">
+        <label>Name:</label>
+        <input type="text" name="name" class="form-control" value="najmul" required="">
+      </div>
+
+      <div class="form-group">
+        <label>Gender:</label>
+        <input type="radio" id="contactChoice1" name="gender" value="male">
+        <label for="contactChoice1">Male</label>
+        <input type="radio" id="contactChoice2" name="gender" value="female">
+        <label for="contactChoice1">Female</label>
+      </div>
+
+      <div class="form-group">
+        <label>Age:</label>
+        <input type="number" name="age" class="form-control" value="" required="">
+      </div>
+
+      <div class="form-group">
+        <label>City:</label>
+        <select id="city" name="city">
+          <option value="lahore">Lahore</option>
+          <option value="gujrat">Gujrat</option>
+          <option value="gujranwala">gujranwala</option>
+          <option value="Sahiwal">Sahiwal</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-secondary btn-save">Save</button>
+
+    </form><br>
+    <table class="table table-bordered data-table">
+
+      <thead>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>City</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+   <script type="text/javascript">
+    $("form").submit(function(e) {
+      e.preventDefault();
+      var name=$("input[name='name']").val();
+      var gender=$("input[name='gender']").val();
+      var age=$("input[name='age']").val();
+      var city=$("select[name='city']").val();
+
+       $(".data-table tbody").append("<tr data-name='"+name+"' data-gender='"+gender+"' data-age='"+age+"' data-city='"+city+"'><td>"+name+"</td><td>"+gender+"</td><td>"+age+"</td><td>"+city+"</td><td><button class='btn btn-danger btn-lg btn-delete mr-3' type='button'>Delete</button></td></tr>");
+
+       $("input[name='']").val("");
+    });
+
+    $('body').on('click','.btn-delete',function() {
+      $(this).parents('tr').remove();
+    });
+
+    $('body').on('click','.btn-edit',function() {
+      var name=$(this).parents('tr').attr('data-name');
+      var email=$(this).parents('tr').attr('data-email');
+
+      $(this).parents('tr').find('td:eq(0)').html("<input name='edit_text' value='"+name+"'>");
+      $(this).parents('tr').find('td:eq(1)').html("<input name='edit_email' value='"+email+"'>");
+
+      $(this).parents('tr').find('td:eq(2)').prepend("<button type='button' class='btn btn-info btn-lg btn-update mr-3'>Update</button>");
+      $(this).hide()
+    });
+
+    $('body').on('click','.btn-update',function() {
+      var name=$(this).parents('tr').find("input[name='edit_text']").val();
+      var email=$(this).parents('tr').find("input[name='edit_email']").val();
+
+      $(this).parents('tr').find('td:eq(0)').text(name);
+      $(this).parents('tr').find('td:eq(1)').text(email);
+
+      $(this).parents('tr').attr('data-name',name);
+      $(this).parents('tr').attr('data-email',email);
+
+      $(this).parents('tr').find('.btn-edit').show();
+      $(this).parents('tr').find('.btn-update').remove();
+
+
+    })
+
+   </script>
+</body>
+</html>
